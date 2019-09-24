@@ -1,10 +1,17 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/widgets.dart' as fw;
+import 'package:image/image.dart' as gambar;
+// import 'package:image/image.dart';
 
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
 import 'package:printing/printing.dart';
+
+
+import 'Mahasiswa.dart';
 
 const PdfColor green = PdfColor.fromInt(0xff9ce5d0);
 const PdfColor lightGreen = PdfColor.fromInt(0xffcdf1e7);
@@ -106,7 +113,7 @@ class Category extends StatelessWidget {
   }
 }
 
-Future<Document> generateDocument(PdfPageFormat format) async {
+Future<Document> generateDocument(PdfPageFormat format,Mahasiswa mahasiswa) async {
   final Document pdf = Document(title: 'My Résumé', author: 'Rendy R');
 
   final PdfImage profileImage = await pdfImageFromImageProvider(
@@ -116,6 +123,15 @@ Future<Document> generateDocument(PdfPageFormat format) async {
       onError: (dynamic exception, StackTrace stackTrace) {
         print('Unable to download image');
       });
+   final img = gambar.decodeImage(base64Decode(mahasiswa.ttd));
+    final image = PdfImage(
+      pdf.document,
+      image: img.data.buffer.asUint8List(),
+      width: img.width,
+      height: img.height,
+    );
+   
+
 
   pdf.addPage(MyPage(
     pageFormat: format.applyMargin(
@@ -128,18 +144,19 @@ Future<Document> generateDocument(PdfPageFormat format) async {
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
+                  // padding: const EdgeInsets.all(8.0),
             Container(
                 padding: const EdgeInsets.only(left: 30, bottom: 20),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text('Halo Mas Apriawan',
+                      Text(mahasiswa.nama,
                           textScaleFactor: 2,
                           style: Theme.of(context)
                               .defaultTextStyle
                               .copyWith(fontWeight: FontWeight.bold)),
                       Padding(padding: const EdgeInsets.only(top: 10)),
-                      Text('HEHEHE',
+                      Text(mahasiswa.email,
                           textScaleFactor: 1.2,
                           style: Theme.of(context).defaultTextStyle.copyWith(
                               fontWeight: FontWeight.bold, color: green)),
@@ -165,13 +182,14 @@ Future<Document> generateDocument(PdfPageFormat format) async {
                             Padding(padding: EdgeInsets.zero)
                           ]),
                     ])),
-            Category(title: 'Work Experience'),
-            Block(title: 'Tour bus driver'),
-            Block(title: 'Logging equipment operator'),
-            Block(title: 'Foot doctor'),
-            Category(title: 'Education'),
-            Block(title: 'Bachelor Of Commerce'),
-            Block(title: 'Bachelor Interior Design'),
+                    LimitedBox(maxHeight: 100.0, child: Image(image)),
+            // Category(title: 'Work Experience'),
+            // Block(title: 'Tour bus driver'),
+            // Block(title: 'Logging equipment operator'),
+            // Block(title: 'Foot doctor'),
+            // Category(title: 'Education'),
+            // Block(title: 'Bachelor Of Commerce'),
+            // Block(title: 'Bachelor Interior Design'),
           ])),
       Container(
         height: double.infinity,
@@ -186,7 +204,11 @@ Future<Document> generateDocument(PdfPageFormat format) async {
                 height: 100,
                 color: lightGreen,
                 child:
-                    profileImage == null ? Container() : Image(profileImage)))
+                    profileImage == null ? Container() : Image(profileImage))
+        ),
+        
+        
+                    
       ])
     ]),
   ));

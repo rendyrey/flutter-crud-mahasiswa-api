@@ -174,7 +174,7 @@ class _HomeScreenState extends State<HomeScreen>{
                         ),
                         FlatButton(
                           onPressed: (){
-                             _printPdf();
+                             _printPdf(mahasiswa);
                           },
                           child:Text(
                             "Print",
@@ -215,10 +215,10 @@ class _HomeScreenState extends State<HomeScreen>{
     ).show(context);
   }
 
-  Future<void> _printPdf() async {
+  Future<void> _printPdf(mahasiswa) async {
     print('Print ...');
     await Printing.layoutPdf(
         onLayout: (PdfPageFormat format) async =>
-            (await generateDocument(format)).save());
+            (await generateDocument(format,mahasiswa)).save());
   }
 }
