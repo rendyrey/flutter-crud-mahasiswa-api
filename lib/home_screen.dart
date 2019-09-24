@@ -1,7 +1,13 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:crud_mahasiswa/ApiService.dart';
+import 'package:crud_mahasiswa/print.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pdf/pdf.dart';
+import 'package:printing/printing.dart';
 
 import 'Mahasiswa.dart';
 import 'form_add_screen.dart';
@@ -74,6 +80,9 @@ class _HomeScreenState extends State<HomeScreen>{
   }
 
   Widget _buildListView(List<Mahasiswa> mahasiswas){
+
+    ByteData _img = ByteData(0);
+    
     return Padding(
       padding:const EdgeInsets.symmetric(vertical: 8,horizontal: 16),
       child:ListView.builder(
@@ -93,7 +102,8 @@ class _HomeScreenState extends State<HomeScreen>{
                       style:Theme.of(context).textTheme.title
                     ),
                     Text(mahasiswa.email),
-                    Text(mahasiswa.nim),
+                    // Text(mahasiswa.nim),
+                    LimitedBox(maxHeight: 100.0, child: Image.memory(base64Decode(mahasiswa.ttd))),
                     // Text(mahasiswa.jenis_kelamin),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -161,7 +171,16 @@ class _HomeScreenState extends State<HomeScreen>{
                             "Edit",
                             style:TextStyle(color:Colors.blue[800])
                           )
-                        )
+                        ),
+                        FlatButton(
+                          onPressed: (){
+                             _printPdf();
+                          },
+                          child:Text(
+                            "Print",
+                            style:TextStyle(color:Colors.blue[800])
+                          )
+                        ),
                       ],
                     )
                   ],
@@ -194,5 +213,12 @@ class _HomeScreenState extends State<HomeScreen>{
       boxShadows: [BoxShadow(color: Colors.red[800], offset: Offset(0.0, 2.0), blurRadius: 3.0,)],
       duration:Duration(seconds:4)
     ).show(context);
+  }
+
+  Future<void> _printPdf() async {
+    print('Print ...');
+    await Printing.layoutPdf(
+        onLayout: (PdfPageFormat format) async =>
+            (await generateDocument(format)).save());
   }
 }

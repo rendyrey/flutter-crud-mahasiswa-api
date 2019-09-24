@@ -1,6 +1,13 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'dart:ui' as ui;
+
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_signature_pad/flutter_signature_pad.dart';
 
 import 'ApiService.dart';
 import 'Mahasiswa.dart';
@@ -16,6 +23,7 @@ class FormAddScreen extends StatefulWidget {
 }
 
 class _FormAddScreenState extends State<FormAddScreen>{
+  final _sign = GlobalKey<SignatureState>();
   bool _isLoading = false;
   ApiService _apiService = ApiService();
   bool _isFieldNamaValid;
@@ -61,10 +69,35 @@ class _FormAddScreenState extends State<FormAddScreen>{
                 _buildTextFieldEmail(),
                 _buildTextFieldNim(),
                 _buildTextFieldJenisKelamin(),
+                Container(
+                  child: Signature(
+                  color: Colors.black,
+                  key: _sign,
+                  onSign: () {
+                    // final sign = _sign.currentState;
+                    // debugPrint('${sign.points.length} points in the signature');
+                  },
+//                  backgroundPainter: _WatermarkPaint("2.0", "2.0"),
+                  strokeWidth: 4.0,
+                ),
+                  height: 120,
+                ),
+                MaterialButton(
+                      color: Colors.red[200],
+                      onPressed: () {
+                        final sign = _sign.currentState;
+                        sign.clear();
+                        // setState(() {
+                        //   _img = ByteData(0);
+                        // });
+                        debugPrint("cleared");
+                      },
+                      child: Text("Clear Signature")),
+               
                 Padding(
                   padding:const EdgeInsets.only(top:8),
                   child:RaisedButton(
-                    onPressed:(){
+                    onPressed:() async {
                       if(_isFieldNamaValid == null ||
                           _isFieldEmailValid == null ||
                           _isFieldNimValid == null ||
@@ -73,16 +106,34 @@ class _FormAddScreenState extends State<FormAddScreen>{
                           !_isFieldEmailValid ||
                           !_isFieldNimValid ||
                           !_isFieldJenisKelaminValid){
-                          messageBoxFailed("Please fill all the fields", "Failed!");
-                return;
+                            messageBoxFailed("Please fill all the fields", "Failed!");
+                            return;
                           }
                           setState(()=> _isLoading = true);
                           String nama = _controllerNama.text.toString();
                           String email = _controllerEmail.text.toString();
                           String nim = _controllerNim.text.toString();
                           String jenisKelamin = _controllerJenisKelamin.text.toString();
+                          
 
-                          Mahasiswa mahasiswa = Mahasiswa(nama:nama,email:email,nim:nim,jenisKelamin:jenisKelamin);
+                          //untuk image
+                        //     final image = await _fbKey.currentState.fields["signature"].currentState.value.getData();
+
+                        // var data = await image.toByteData(format: ui.ImageByteFormat.png);
+                        // final encoded = base64.encode(data.buffer.asUint8List());
+                        //   String ttd = encoded;
+                        //   print(ttd);
+
+                        //misalnya ini teh submit.
+                        //di sini coba simpen ke gallery atau ke server, atau ke manapun pri. nanti diloadnya tinggal link
+                        //image nya, misalnya simpen gambar/upload ke server, linknya di database.
+                        //load image di sini.
+                        final sign = _sign.currentState;
+                        final image = await sign.getData();
+                        var data = await image.toByteData(format: ui.ImageByteFormat.png);
+                        final encoded = base64.encode(data.buffer.asUint8List());
+                        // print(encoded);
+                          Mahasiswa mahasiswa = Mahasiswa(nama:nama,email:email,nim:nim,jenisKelamin:jenisKelamin,ttd:encoded);
                           if(widget.mahasiswa == null){
                               _apiService.createMahasiswa(mahasiswa).then((isSuccess){
                               setState(()=> _isLoading = false);
@@ -101,8 +152,8 @@ class _FormAddScreenState extends State<FormAddScreen>{
                             _apiService.updateMahasiswa(mahasiswa).then((isSuccess){
                               setState(()=>_isLoading = false);
                               if(isSuccess){
-                                messageBoxSuccess("Update data success", "Success!");
                                 Navigator.pop(_scaffoldState.currentState.context);
+                                messageBoxSuccess("Update data success", "Success!");
                               }else{
                                 _scaffoldState.currentState.showSnackBar(
                                   SnackBar(

@@ -9,7 +9,8 @@ class ApiService{
   Client client = Client();
 
   Future<List<Mahasiswa>> getMahasiswa() async {
-    final response = await client.get("$baseUrl/api/mahasiswa",headers: {HttpHeaders.authorizationHeader:"Bearer rEnDy"});
+    final response = await client.get(
+      "$baseUrl/api/mahasiswa",headers: {HttpHeaders.authorizationHeader:"Bearer rEnDy"});
     if(response.statusCode == 200){
       return mahasiswaFromJson(response.body);
     }else{

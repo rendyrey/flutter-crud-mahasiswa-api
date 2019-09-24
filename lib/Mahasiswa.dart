@@ -6,13 +6,15 @@ class Mahasiswa{
   String nim;
   String email;
   String jenisKelamin;
+  String ttd;
 
   Mahasiswa({
     this.id = 0,
     this.nama,
     this.nim,
     this.email,
-    this.jenisKelamin
+    this.jenisKelamin,
+    this.ttd
   });
 
   factory Mahasiswa.fromJson(Map<String,dynamic>map){
@@ -21,7 +23,8 @@ class Mahasiswa{
       nim:map["nim"],
       nama:map["nama"],
       email:map["email"],
-      jenisKelamin:map["jenis_kelamin"]
+      jenisKelamin:map["jenis_kelamin"],
+      ttd:map["ttd"]
     );
   }
 
@@ -32,6 +35,7 @@ class Mahasiswa{
       "nim":nim,
       "email":email,
       "jenis_kelamin":jenisKelamin,
+      "ttd":ttd
     };
   }
 
