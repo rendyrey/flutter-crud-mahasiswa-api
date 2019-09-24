@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:blue_thermal_printer/blue_thermal_printer.dart';
-import 'package:flutter/cupertino.dart';
 
 
 class TestPrint {
@@ -25,9 +24,7 @@ class TestPrint {
         bluetooth.printNewLine();
         bluetooth.printCustom(jenisKelamin,2,1);
         bluetooth.printNewLine();
-        bluetooth.printImage(function(data){
-          
-        });
+        bluetooth.writeBytes(base64Decode(ttd));
         bluetooth.printNewLine();
         bluetooth.printNewLine();
         bluetooth.paperCut();
