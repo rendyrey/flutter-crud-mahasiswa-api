@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:crud_mahasiswa/ApiService.dart';
 import 'package:crud_mahasiswa/print.dart';
+import 'package:crud_mahasiswa/printer.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,7 @@ import 'Mahasiswa.dart';
 import 'form_add_screen.dart';
 
 class HomeScreen extends StatefulWidget{
+  
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -174,7 +176,13 @@ class _HomeScreenState extends State<HomeScreen>{
                         ),
                         FlatButton(
                           onPressed: (){
-                             _printPdf(mahasiswa);
+                            //  _printPdf(mahasiswa);
+                            Navigator.push(
+                              _scaffoldState.currentContext,
+                              MaterialPageRoute(builder: (BuildContext context) {
+                                return Printer(mahasiswa:mahasiswa);
+                              }),
+                            );
                           },
                           child:Text(
                             "Print",
@@ -221,4 +229,8 @@ class _HomeScreenState extends State<HomeScreen>{
         onLayout: (PdfPageFormat format) async =>
             (await generateDocument(format,mahasiswa)).save());
   }
+
+
+
+
 }
