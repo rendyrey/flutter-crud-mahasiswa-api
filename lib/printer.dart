@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 // import 'package:blue_thermal_printer_example/testprint.dart';
@@ -53,21 +54,23 @@ class PrinterState extends State<Printer> {
     }
     super.initState();
     initPlatformState();
-    // initSavetoPath();
+    initSavetoPath();
     testPrint = TestPrint();
   }
 
-  // initSavetoPath()async{
-  //   //read and write
-  //   //image max 300px X 300px
-  //   final filename = 'yourlogo.png';
-  //   var bytes = await rootBundle.load("assets/images/yourlogo.png");
-  //   String dir = (await getApplicationDocumentsDirectory()).path;
-  //   writeToFile(bytes,'$dir/$filename');
-  //   setState(() {
-  //     pathImage='$dir/$filename';
-  //   });
-  // }
+  initSavetoPath()async{
+    //read and write
+    //image max 300px X 300px
+    final filename = 'ttd.png';
+    var bytes = await rootBundle.load('mylogo.png');
+    String dir = (await getApplicationDocumentsDirectory()).path;
+    writeToFile(bytes,'$dir/$filename');
+    setState(() {
+      pathImage='$dir/$filename';
+    });
+  }
+
+
 
 
   Future<void> initPlatformState() async {
