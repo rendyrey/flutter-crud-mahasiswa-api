@@ -58,17 +58,17 @@ class PrinterState extends State<Printer> {
     testPrint = TestPrint();
   }
 
-  initSavetoPath()async{
+ initSavetoPath()async{
     //read and write
     //image max 300px X 300px
-    final filename = 'ttd.png';
-    var bytes = await rootBundle.load('mylogo.png');
+    final filename = 'yourlogo.png';
+    var bytes = await rootBundle.load("assets/images/polytron.jpg");
     String dir = (await getApplicationDocumentsDirectory()).path;
     writeToFile(bytes,'$dir/$filename');
     setState(() {
-      pathImage='$dir/$filename';
-    });
-  }
+     pathImage='$dir/$filename';
+   });
+ }
 
 
 
@@ -146,7 +146,7 @@ class PrinterState extends State<Printer> {
                 padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 50),
                 child:  RaisedButton(
                   onPressed:(){
-                    testPrint.printThermal(nim,nama,email,jenisKelamin,ttd);
+                    testPrint.printThermal(nim,nama,email,jenisKelamin,ttd,pathImage);
                   },
                   child: Text('Print '+nama),
                 ),
