@@ -51,7 +51,7 @@ class TestPrint {
 
     bluetooth.isConnected.then((isConnected){
       if(isConnected){
-        bluetooth.printImage(pathImage);
+        // bluetooth.printImage(pathImage);
         bluetooth.printNewLine();
         bluetooth.printCustom("PT SARANA KENCANA MULYA",3,1);
         bluetooth.printNewLine();
@@ -67,7 +67,8 @@ class TestPrint {
         bluetooth.printNewLine();
         bluetooth.printCustom("TIPE: PRZ 211BW",0,0);
         bluetooth.printNewLine();
-        bluetooth.printLeftRight("NO SERI:25B00478","GARANSI: TIDAK GARANSI",0);
+        bluetooth.printCustom("NO SERI:25B00478",0,0);
+        bluetooth.printCustom("GARANSI: TIDAK GARANSI",0,2);
         bluetooth.printCustom("SERVICE TYPE: KL",0,2);
         bluetooth.printCustom("KELENGKAPAN: UNIT, RAK",0,1);
         bluetooth.printCustom("KERUSAKAN: TIDAK DINGIN",0,1);
@@ -78,23 +79,28 @@ class TestPrint {
         bluetooth.printCustom("TELP: 0291-755282",0,0);
         bluetooth.printNewLine();
         bluetooth.printCustom("PEMAKAIAN KOMPONEN",0,0);
-        bluetooth.printLeftRight("WA-137017-00A","DISC 25%   1   487,500",0);
+        bluetooth.printCustom("WA-137017-00A",0,0);
+        bluetooth.printCustom("DISC 25%    1    487,500",0,2);
         bluetooth.printCustom("FRONT REINFORCEMENT RH REF 50",0,0);
-        bluetooth.printLeftRight("WA-137017-00A","DISC 30%   2   210,000",0);
+        bluetooth.printCustom("EG-300089-ATA",0,0);
+        bluetooth.printCustom("DISC 30%    2    210,000",0,2);
         bluetooth.printCustom("TAPPING SCREW FOR GROUNDUC BTV 3X8",0,0);
-        bluetooth.printLeftRight("BIAYA JASA SERVICE","DISC 15%       85,000",0);
-        bluetooth.printLeftRight("TOTAL BIAYA SERVICE","782,500",0);
-        bluetooth.printLeftRight("PPN","78,250",0);
-        bluetooth.printLeftRight("TOTAL BIAYA SERVICE SETELAH PPN","860,750",0);
-
+        bluetooth.printCustom("BIAYA JASA SERVICE",0,0);
+        bluetooth.printCustom("DISC 15%          85,000",0,2);
+        bluetooth.printCustom("TOTAL BIAYA SERVICE",0,0);
+        bluetooth.printCustom("782,500",0,2);
+        bluetooth.printCustom("PPN",0,0);
+        bluetooth.printCustom("78,250",0,2);
+        bluetooth.printCustom("TOTAL BIAYA SERVICE SETELAH PPN",0,0);
+        bluetooth.printCustom("860,750",0,2);
         bluetooth.printCustom("TERBILANG: DELAPAN RATUS ENAM PULUH RIBU TUJUH RATUS LIMA PULUH RUPIAH",0,0);
         bluetooth.printNewLine();
-        bluetooth.printLeftRight("DISTRIK SERVICE: KUDUS","PENERIMA:",0);
-        bluetooth.printLeftRight("DICETAK OLEH: amelia_s","TTD KONSUMEN",0);
+        bluetooth.printCustom("DISTRIK SERVICE: KUDUS",0,0);
+        bluetooth.printCustom("DICETAK OLEH: amelia_s",0,0);
+        bluetooth.printCustom("PENERIMA:",0,2);
+        bluetooth.printCustom("TTD KONSUMEN",0,2);
         bluetooth.printNewLine();
-        bluetooth.printCustom("Lembar ini sebagai bukti garansi jasa service dan komponen sejenis",0,1);
-        bluetooth.printCustom("dengan diagram yang sama yang diganti selama 60 hari terhitung",0,1);
-        bluetooth.printCustom("dari tanggal pengambilan/pengiriman",0,1);
+        bluetooth.printCustom("Lembar ini sebagai bukti garansi jasa service dan komponen sejenis dengan diagram yang sama yang diganti, selama 60 hari terhitung dari tanggal pengambilan/pengiriman",0,1);
         bluetooth.printNewLine();
         bluetooth.printCustom("ASLI/REPRINT 1/REPRINT 2",3,1);
         bluetooth.printNewLine();
@@ -104,15 +110,24 @@ class TestPrint {
         bluetooth.printCustom("TIPE: PRZ 211BW",0,0);
         bluetooth.printCustom("NO SERI:25B00478",0,0);
         bluetooth.printCustom("RINCIAN YNAG HARUS DIBAYAR:",0,0);
-        bluetooth.printLeftRight("TOTAL BIAYA SERVICE SETELAH PPN","860,750",0);
-        bluetooth.printLeftRight("UANG TITIPAN 20/06/19", "(200,000)",0);
-        bluetooth.printLeftRight("UANG TITIPAN 25/06/19", "(100,000)",0);
-        bluetooth.printLeftRight("TOTAL BIAYA YANG HARUS DIBAYAR", "560,750", 0);
+        bluetooth.printCustom("TOTAL BIAYA SERVICE SETELAH PPN",0,0);
+        bluetooth.printCustom("860,750",0,2);
+        bluetooth.printCustom("UANG TITIPAN 20/06/19",0,0);
+        bluetooth.printCustom("(200,000)",0,2);
+        bluetooth.printCustom("UANG TITIPAN 25/06/19",0,0);
+        bluetooth.printCustom("(100,000)",0,2);
+        bluetooth.printCustom("TOTAL BIAYA YANG HARUS DIBAYAR",0, 0);
+        bluetooth.printCustom("560,750",0,2);
         bluetooth.printCustom("TERBILANG: LIMA RATUS ENAM PULUH RIBU TUJUH RATUS LIMA PULUH RUPIAH",0,0);
         bluetooth.printNewLine();
-        bluetooth.printLeftRight("DISTRIK SERVICE: KUDUS","PENERIMA:",0);
-        bluetooth.printLeftRight("DICETAK OLEH: amelia_s","TTD KONSUMEN",0);
+        bluetooth.printCustom("DISTRIK SERVICE: KUDUS",0,0);
+        bluetooth.printCustom("DICETAK OLEH: amelia_s",0,0);
+        bluetooth.printCustom("PENERIMA",0,2);
+        bluetooth.printCustom("TTD KONSUMEN",0,2);
+        bluetooth.paperCut();
       }
+
+      
     });
   }
 }
