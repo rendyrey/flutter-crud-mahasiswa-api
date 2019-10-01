@@ -51,22 +51,17 @@ class TestPrint {
 
     bluetooth.isConnected.then((isConnected){
       if(isConnected){
-        // bluetooth.printImage(pathImage);
+        bluetooth.printImage(pathImage);
         bluetooth.printNewLine();
         bluetooth.printCustom("PT SARANA KENCANA MULYA",3,1);
         bluetooth.printNewLine();
         bluetooth.printCustom("RINCIAN BIAYA",3,1);
         bluetooth.printNewLine();
         bluetooth.printLeftRight("PEMBARAYAN: DEBIT","27/06/2020 15.10 WIB",0);
-        bluetooth.printNewLine();
         bluetooth.printCustom("NOMOR: IS-KDS-AG-200627001",0,0);
-        bluetooth.printNewLine();
         bluetooth.printCustom("CASE: CS-KDS-AG-200627001",0,0);
-        bluetooth.printNewLine();
         bluetooth.printCustom("SVC CALL: SC-KDS-AG-200627001",0,0);
-        bluetooth.printNewLine();
         bluetooth.printCustom("TIPE: PRZ 211BW",0,0);
-        bluetooth.printNewLine();
         bluetooth.printCustom("NO SERI:25B00478",0,0);
         bluetooth.printCustom("GARANSI: TIDAK GARANSI",0,2);
         bluetooth.printCustom("SERVICE TYPE: KL",0,2);
