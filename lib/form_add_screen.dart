@@ -22,6 +22,37 @@ class FormAddScreen extends StatefulWidget {
   _FormAddScreenState createState() => _FormAddScreenState();
 }
 
+
+class _WatermarkPaint extends CustomPainter {
+  final String price;
+  final String watermark;
+
+  _WatermarkPaint(this.price, this.watermark);
+
+  @override
+  void paint(ui.Canvas canvas, ui.Size size) {
+  //  canvas.drawCircle(Offset(size.width / 2, size.height / 2), 100, Paint()..color = Colors.black12);
+      var rect = Rect.fromLTWH(0, 0, size.width, size.height);
+      final paint = Paint();
+      paint.color = Colors.white;
+    // draw the rectangle using the paint
+    // canvas.drawRect(rect, Paint()..color = Colors.black12);
+    canvas.drawRect(rect,paint);
+  }
+
+  @override
+  bool shouldRepaint(_WatermarkPaint oldDelegate) {
+    return oldDelegate != this;
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) || other is _WatermarkPaint && runtimeType == other.runtimeType && price == other.price && watermark == other.watermark;
+
+  @override
+  int get hashCode => price.hashCode ^ watermark.hashCode;
+}
+
 class _FormAddScreenState extends State<FormAddScreen>{
   final _sign = GlobalKey<SignatureState>();
   bool _isLoading = false;
@@ -73,11 +104,12 @@ class _FormAddScreenState extends State<FormAddScreen>{
                   child: Signature(
                   color: Colors.black,
                   key: _sign,
+                  
                   onSign: () {
                     // final sign = _sign.currentState;
                     // debugPrint('${sign.points.length} points in the signature');
                   },
-//                  backgroundPainter: _WatermarkPaint("2.0", "2.0"),
+                 backgroundPainter: _WatermarkPaint("2.0", "2.0"),
                   strokeWidth: 4.0,
                 ),
                   height: 120,

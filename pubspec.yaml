@@ -17,6 +17,7 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  raw:
   image:
   http:
   flushbar:
@@ -46,6 +47,7 @@ dev_dependencies:
 flutter:
   assets:
     - assets/images/polytron.jpg
+    - assets/images/index.jpg
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

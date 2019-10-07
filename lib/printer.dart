@@ -54,20 +54,34 @@ class PrinterState extends State<Printer> {
     }
     super.initState();
     initPlatformState();
-    initSavetoPath();
+    // initSavetoPath();
     testPrint = TestPrint();
+    _createFileFromString();
   }
 
- initSavetoPath()async{
-    //read and write
-    //image max 300px X 300px
-    final filename = 'yourlogo.png';
-    var bytes = await rootBundle.load("assets/images/polytron.jpg");
-    String dir = (await getApplicationDocumentsDirectory()).path;
-    writeToFile(bytes,'$dir/$filename');
+//  initSavetoPath() async{
+//     // read and write
+//     // image max 300px X 300px
+//     final filename = 'yourlogo.png';
+//     var bytes = await rootBundle.load("assets/images/index.jpg");
+//     String dir = (await getApplicationDocumentsDirectory()).path;
+//     writeToFile(bytes,'$dir/$filename');
+//     setState(() {
+//      pathImage='$dir/$filename';
+//    });
+//  }
+
+ _createFileFromString() async {
+  final encodedStr = this.ttd;
+  Uint8List bytes = base64Decode(encodedStr);
+  String dir = (await getApplicationDocumentsDirectory()).path;
+  File file = File(
+      "$dir/" + DateTime.now().millisecondsSinceEpoch.toString() + ".png");
+  await file.writeAsBytes(bytes);
     setState(() {
-     pathImage='$dir/$filename';
+    pathImage =  file.path;
    });
+   
  }
 
 
