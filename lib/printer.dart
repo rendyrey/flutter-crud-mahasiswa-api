@@ -84,9 +84,6 @@ class PrinterState extends State<Printer> {
    
  }
 
-
-
-
   Future<void> initPlatformState() async {
     List<BluetoothDevice> devices = [];
 
