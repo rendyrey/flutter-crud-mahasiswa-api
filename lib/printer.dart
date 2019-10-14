@@ -31,6 +31,7 @@ class PrinterState extends State<Printer> {
   bool _connected = false;
   bool _pressed = false;
   String pathImage;
+  String pathImageTtd;
   TestPrint testPrint;
   Mahasiswa mhstemp;
   String nama;
@@ -54,22 +55,22 @@ class PrinterState extends State<Printer> {
     }
     super.initState();
     initPlatformState();
-    // initSavetoPath();
+    initSavetoPath();
     testPrint = TestPrint();
     _createFileFromString();
   }
 
-//  initSavetoPath() async{
-//     // read and write
-//     // image max 300px X 300px
-//     final filename = 'yourlogo.png';
-//     var bytes = await rootBundle.load("assets/images/index.jpg");
-//     String dir = (await getApplicationDocumentsDirectory()).path;
-//     writeToFile(bytes,'$dir/$filename');
-//     setState(() {
-//      pathImage='$dir/$filename';
-//    });
-//  }
+ initSavetoPath() async{
+    // read and write
+    // image max 300px X 300px
+    final filename = 'yourlogo.png';
+    var bytes = await rootBundle.load("assets/images/polytron.jpg");
+    String dir = (await getApplicationDocumentsDirectory()).path;
+    writeToFile(bytes,'$dir/$filename');
+    setState(() {
+     pathImage='$dir/$filename';
+   });
+ }
 
  _createFileFromString() async {
   final encodedStr = this.ttd;
@@ -79,7 +80,7 @@ class PrinterState extends State<Printer> {
       "$dir/" + DateTime.now().millisecondsSinceEpoch.toString() + ".png");
   await file.writeAsBytes(bytes);
     setState(() {
-    pathImage =  file.path;
+    pathImageTtd =  file.path;
    });
    
  }
@@ -157,7 +158,7 @@ class PrinterState extends State<Printer> {
                 padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 50),
                 child:  RaisedButton(
                   onPressed:(){
-                    testPrint.printThermal(nim,nama,email,jenisKelamin,ttd,pathImage);
+                    testPrint.printThermal(nim,nama,email,jenisKelamin,ttd,pathImage,pathImageTtd);
                   },
                   child: Text('Print '+nama),
                 ),

@@ -9,7 +9,7 @@ import 'package:path_provider/path_provider.dart';
 class TestPrint {
   BlueThermalPrinter bluetooth = BlueThermalPrinter.instance;
 
-   printThermal(String nim,String nama, String email, String jenisKelamin, String ttd,String pathImage) async {
+   printThermal(String nim,String nama, String email, String jenisKelamin, String ttd,String pathImage,String pathImageTtd) async {
     
  
     //  Image image = decodeImage(base64Decode(ttd));
@@ -22,6 +22,8 @@ class TestPrint {
     // 0- ESC_ALIGN_LEFT
     // 1- ESC_ALIGN_CENTER
     // 2- ESC_ALIGN_RIGHT
+
+
     // bluetooth.isConnected.then((isConnected) {
     //   if (isConnected) {
     //     bluetooth.printCustom(nama,3,1);
@@ -50,56 +52,58 @@ class TestPrint {
     //   }
     // });
 
-    String printSpace(String string1, String string2){
-      String whitespace = '';
-      int spasi = 63 - (string1.length + string2.length);
-      for(int i=0;i<=spasi;i++){
-        whitespace += ' ';
-      }
-      return whitespace;
-    }
-    String pt = "PT SARANA KENCANA MULYA";
-    // kode barang nama barang
-    // 1 x 500.000 Disc 10%    450.000
-    String barang1 = "WA-137017-00A PEMAKAIAN KOMPONEN";
-    String harga1 = "1 X 600.000 DISC 25%";
-    String total1 = "487.500";
-    
-    String barang2 = "EG-300089-ATA FRONT REINFORCEMENT RH REF 50";
-    String harga2 = "2 X 400.000 DISC 30%";
-    String total2 = "210.000";
-    String barang3 = "TAPPING SCREW FOR GROUNDUC BTV 3X8";
-    String barang4 = "BIAYA JASA SERVICE";
-    String harga4 = "1 X 100.000 DISC 15%";
-    String total4 = "85.000";
-    bluetooth.isConnected.then((isConnected){
-      if(isConnected){
-        bluetooth.printImage(pathImage);
-        bluetooth.printNewLine();
-        bluetooth.printCustom("PT SARANA KENCANA MULYA",3,1);
-        bluetooth.printNewLine();
-        bluetooth.printCustom("RINCIAN BIAYA",3,1);
-        bluetooth.printNewLine();
-        bluetooth.printLeftRight("PEMBARAYAN: DEBIT","27/06/2020 15.10 WIB",0);
-        bluetooth.printCustom("NOMOR: IS-KDS-AG-200627001",0,0);
-        bluetooth.printCustom("CASE: CS-KDS-AG-200627001",0,0);
-        bluetooth.printCustom("SVC CALL: SC-KDS-AG-200627001",0,0);
-        bluetooth.printCustom("TIPE: PRZ 211BW",0,0);
-        bluetooth.printCustom("NO SERI:25B00478",0,0);
-        bluetooth.printCustom("GARANSI: TIDAK GARANSI",0,2);
-        bluetooth.printCustom("SERVICE TYPE: KL",0,2);
-        bluetooth.printCustom("KELENGKAPAN: UNIT, RAK",0,1);
-        bluetooth.printCustom("KERUSAKAN: TIDAK DINGIN",0,1);
-        bluetooth.printNewLine();
-        bluetooth.printCustom("ID NPWP/KTP/PASPOR: 3315072201870000",0,0);
-        bluetooth.printCustom("NAMA PEMILIK: DARMADI",0,0);
-        bluetooth.printCustom("ALAMAT: JL. GLUNTUNGAN 3 NO 4 RT 02/04 BANJARSARI, KRADENAN GROBOGAN",0,0);
-        bluetooth.printCustom("TELP: 0291-755282",0,0);
-        bluetooth.printNewLine();
-        bluetooth.printCustom(barang1,0,0);
 
-        bluetooth.printCustom(harga1+printSpace(harga1, total1)+total1,0,0);
-        bluetooth.printCustom(harga2+printSpace(harga2,total2)+total2,0,0);
+  // ================================================= print spasi ========================================= //
+    // String printSpace(String string1, String string2){
+    //   String whitespace = '';
+    //   int spasi = 63 - (string1.length + string2.length);
+    //   for(int i=0;i<=spasi;i++){
+    //     whitespace += ' ';
+    //   }
+    //   return whitespace;
+    // }
+    // String pt = "PT SARANA KENCANA MULYA";
+    // // kode barang nama barang
+    // // 1 x 500.000 Disc 10%    450.000
+    // String barang1 = "WA-137017-00A PEMAKAIAN KOMPONEN";
+    // String harga1 = "1 X 600.000 DISC 25%";
+    // String total1 = "487.500";
+    
+    // String barang2 = "EG-300089-ATA FRONT REINFORCEMENT RH REF 50";
+    // String harga2 = "2 X 400.000 DISC 30%";
+    // String total2 = "210.000";
+    // String barang3 = "TAPPING SCREW FOR GROUNDUC BTV 3X8";
+    // String barang4 = "BIAYA JASA SERVICE";
+    // String harga4 = "1 X 100.000 DISC 15%";
+    // String total4 = "85.000";
+    // bluetooth.isConnected.then((isConnected){
+    //   if(isConnected){
+    //     bluetooth.printImage(pathImage);
+    //     bluetooth.printNewLine();
+    //     bluetooth.printCustom("PT SARANA KENCANA MULYA",3,1);
+    //     bluetooth.printNewLine();
+    //     bluetooth.printCustom("RINCIAN BIAYA",3,1);
+    //     bluetooth.printNewLine();
+    //     bluetooth.printLeftRight("PEMBARAYAN: DEBIT","27/06/2020 15.10 WIB",0);
+    //     bluetooth.printCustom("NOMOR: IS-KDS-AG-200627001",0,0);
+    //     bluetooth.printCustom("CASE: CS-KDS-AG-200627001",0,0);
+    //     bluetooth.printCustom("SVC CALL: SC-KDS-AG-200627001",0,0);
+    //     bluetooth.printCustom("TIPE: PRZ 211BW",0,0);
+    //     bluetooth.printCustom("NO SERI:25B00478",0,0);
+    //     bluetooth.printCustom("GARANSI: TIDAK GARANSI",0,2);
+    //     bluetooth.printCustom("SERVICE TYPE: KL",0,2);
+    //     bluetooth.printCustom("KELENGKAPAN: UNIT, RAK",0,1);
+    //     bluetooth.printCustom("KERUSAKAN: TIDAK DINGIN",0,1);
+    //     bluetooth.printNewLine();
+    //     bluetooth.printCustom("ID NPWP/KTP/PASPOR: 3315072201870000",0,0);
+    //     bluetooth.printCustom("NAMA PEMILIK: DARMADI",0,0);
+    //     bluetooth.printCustom("ALAMAT: JL. GLUNTUNGAN 3 NO 4 RT 02/04 BANJARSARI, KRADENAN GROBOGAN",0,0);
+    //     bluetooth.printCustom("TELP: 0291-755282",0,0);
+    //     bluetooth.printNewLine();
+    //     bluetooth.printCustom(barang1,0,0);
+
+    //     bluetooth.printCustom(harga1+printSpace(harga1, total1)+total1,0,0);
+    //     bluetooth.printCustom(harga2+printSpace(harga2,total2)+total2,0,0);
         // bluetooth.printCustom("FRONT REINFORCEMENT RH REF 50",0,0);
         // bluetooth.printCustom("EG-300089-ATA",0,0);
         // bluetooth.printCustom("DISC 30%    2    210,000",0,2);
@@ -143,10 +147,93 @@ class TestPrint {
         // bluetooth.printCustom("DICETAK OLEH: amelia_s",0,0);
         // bluetooth.printCustom("PENERIMA",0,2);
         // bluetooth.printCustom("TTD KONSUMEN",0,2);
-        bluetooth.paperCut();
-      }
+        // bluetooth.paperCut();
+      // }
 
       
+    // });
+
+
+
+
+    // ======================================= print contoh faktur ======================================== //
+    String term1 = "1. GARANSI DIBERIKAN APABILA PRODUK DISERTAI KARTU GARANSI DAN BUKTI PEMBELIAN YANG ASLI, SAH DAN BENAR";
+    String term2 = "2. UNTUK PRODUK YANG MASIH GARANSI JUAL, MASA BERLAKU S/D....";
+    String term3 = "3. UNTUK PRODUK TIDAK GARANSI ATAU BEKAS PERBAIKAN DI LUAR SERVICE CENTER RESMI PT HIT; KARENA MEMILIKI RISIKO REPARASI YANG BESAR MAKA "+
+    "KONSEKUENSI ADANYA RISIKO REPARASI DAN TIDAK AKAN MENGAJUKAN KEBERATAN DI KEMUDIAN HARI. RISIKO REPARASI ANTARA LAIN: PRODUK TIDAK BISA DIPERBAIKI, ADANYA KERUSAKAN TAMBAHAN, DLL.";
+    String term4 = "4. KAMI TIDAK BERTANGGUNG JAWAB TERHADAP KEHILANGAN/KERUSAKAN DATA DI DALAM MEMORI PRODUK. KONSUMEN HARUS MEM-BACKUP DATANYA SEBELUM DIPERBAIKI.";
+    String term5 = "5. ADANYA PERUBAHAN STATUS GARANSI MENJADI TIDAK GARANSI, APABILA DITEMUKAN KESALAHAN GARANSI SETELAH PRODUK DIPERIKSA LEBIH LANJUT.";
+    String term6 = "6. KONDISI PRODUK DAN KELENGKAPANNYA";
+    String term7 = "7. SAAT MENGAMBIL BARANG, KONSUMEN HARUS MENUNJUKKAN TANDA IDENTITAS (NPWP/KTP/PASPOR) DAN TANDA TERIMA RESMI PT HIT";
+    String term8 = "8. KAMI TIDAK BERTANGGUNG JAWAB ATAS PRODUK DAN JAMINAN YANG LEBIH DARI 3 (TIGA) BULAN TIDAK DIURUS/DIAMBIL OLEH KONSUMEN.";
+    String term9 = "9. DENGAN MENDANTANGAI TANDA TERIMA INI, BERARTI KONSUMEN TELAH MENYETUJUI PERSYARATAN PERBAIKAN SESUAI KARTU GARANSI DAN KETENTUAN LAYANAN SERVICE PT HIT";
+    bluetooth.isConnected.then((isConnected){
+      if(isConnected){
+        bluetooth.printImage(pathImage);
+        bluetooth.printNewLine();
+        bluetooth.printCustom("PT SARANA KENCANA MULYA",3,1);
+        bluetooth.printNewLine();
+        bluetooth.printCustom("SERVICE TICKET",3,1);
+        bluetooth.printCustom("27/06/2020 15:10 WIB",0,2);
+        bluetooth.printCustom("CASE: CS-KDS-AG-200627001",0,0);
+        bluetooth.printCustom("SVC CALL: SC-KDS-AG-200627001",0,0);
+        bluetooth.printCustom("TIPE: PRZ 211BW",0,0);
+        bluetooth.printCustom("NO SERI:25B00478",0,0);
+        bluetooth.printCustom("GARANSI: TIDAK GARANSI",0,2);
+        bluetooth.printCustom("SERVICE TYPE: KL",0,2);
+        bluetooth.printCustom("KELENGKAPAN: UNIT, RAK",0,0);
+        bluetooth.printCustom("KERUSAKAN: TIDAK DINGIN",0,0);
+        bluetooth.printNewLine();
+        bluetooth.printCustom("ID NPWP/KTP/PASPOR: 3315072201870000",0,0);
+        bluetooth.printCustom("NAMA PEMILIK: DARMADI",0,0);
+        bluetooth.printCustom("ALAMAT: JL. GLUNTUNGAN 3 NO 4 RT 02/04 BANJARSARI, KRADENAN GROBOGAN",0,0);
+        bluetooth.printCustom("TELP: 0291-755282",0,0);
+        bluetooth.printNewLine();
+        bluetooth.printCustom("DISTRIK SERVICE: KUDUS",0,0);
+        bluetooth.printCustom("DICETAK OLEH: amelia_s",0,0);
+        bluetooth.printNewLine();
+        bluetooth.printCustom("HAL-HAL YANG SUDAH DISETUJUI SEBAGAI SYARAT PERBAIKAN:",0,0);
+        bluetooth.printCustom(term1,0,0);
+        bluetooth.printNewLine();
+        bluetooth.printCustom(term2,0,0);
+        bluetooth.printNewLine();
+        bluetooth.printCustom(term3,0,0);
+        bluetooth.printNewLine();
+        bluetooth.printCustom(term4,0,0);
+        bluetooth.printNewLine();
+        bluetooth.printCustom(term5,0,0);
+        bluetooth.printNewLine();
+        bluetooth.printCustom(term6,0,0);
+        bluetooth.printNewLine();
+        bluetooth.printCustom(term7,0,0);
+        bluetooth.printNewLine();
+        bluetooth.printCustom(term8,0,0);
+        bluetooth.printNewLine();
+        bluetooth.printCustom(term9,0,0);
+        bluetooth.printNewLine();
+        bluetooth.printCustom("ASLI/REPRINT 1/REPRINT 2",3,1);
+        bluetooth.printNewLine();
+        bluetooth.printCustom("TANDA TERIMA JAMINAN",3,1);
+        bluetooth.printNewLine();
+        bluetooth.printCustom("27/06/2020 15:10",0,2);
+        bluetooth.printCustom("CASE: CS-KDS-AG-200627001",0,0);
+        bluetooth.printCustom("SVC CALL: SC-KDS-AG-200627001",0,0);
+        bluetooth.printCustom("TIPE: PRZ 211BW",0,0);
+        bluetooth.printCustom("NO SERI:25B00478",0,0);
+        bluetooth.printNewLine();
+        bluetooth.printCustom("JUMLAH: RP.200.000",0,0);
+        bluetooth.printCustom("TERBILANG: DUA RATUS RIBU RUPIAH",0,0);
+        bluetooth.printCustom("DISTRIK SERVICE: KUDUS",0,0);
+        bluetooth.printCustom("DICETAK OLEH: amelia_s",0,0);
+        bluetooth.printNewLine();
+        bluetooth.printCustom("KITTIR",3,1);
+        bluetooth.printCustom("27/06/2020 15:10",0,0);
+        bluetooth.printCustom("CASE: CS-KDS-AG-200627001",1,0);
+        bluetooth.printCustom("SVC CALL: SC-KDS-AG-200627001",1,0);
+        bluetooth.printCustom("TIPE: PRZ 211BW",1,0);
+        bluetooth.printCustom("NO SERI:25B00478",1,0);
+        bluetooth.paperCut();
+      }
     });
   }
 }
