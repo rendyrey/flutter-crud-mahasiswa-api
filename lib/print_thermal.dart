@@ -359,7 +359,7 @@ class TestPrint {
         bluetooth.printNewLine();
         bluetooth.printCustom("PT SARANA KENCANA MULYA",3,1);
         bluetooth.printNewLine();
-        bluetooth.printCustom("RINCIAN BIAYA",3,1);
+        bluetooth.printCustom("RINCIAN PENGGANTIAN KOMPONEN GARANSI",2,1);
         bluetooth.printCustom("27/06/2020 15:10 WIB",0,2);
         bluetooth.printCustom("NOMOR: IS-KDS-AG-200627001",0,0);
         bluetooth.printCustom("CASE: CS-KDS-AG-200627001",0,0);
@@ -406,7 +406,7 @@ class TestPrint {
         bluetooth.printNewLine();
         bluetooth.printCustom("PT SARANA KENCANA MULYA",3,1);
         bluetooth.printNewLine();
-        bluetooth.printCustom("RINCIAN BIAYA",3,1);
+        bluetooth.printCustom("TANDA TERIMA JAMINAN",3,1);
         bluetooth.printCustom("27/06/2020 15:10 WIB",0,2);
         bluetooth.printCustom("NOMOR: IS-KDS-AG-200627001",0,0);
         bluetooth.printCustom("CASE: CS-KDS-AG-200627001",0,0);
