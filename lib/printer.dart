@@ -158,9 +158,36 @@ class PrinterState extends State<Printer> {
                 padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 50),
                 child:  RaisedButton(
                   onPressed:(){
-                    testPrint.printThermal(nim,nama,email,jenisKelamin,ttd,pathImage,pathImageTtd);
+                    testPrint.printServiceKittir(nim,nama,email,jenisKelamin,ttd,pathImage,pathImageTtd);
                   },
-                  child: Text('Print '+nama),
+                  child: Text('Print Service Ticket & Kittir'),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 50),
+                child:  RaisedButton(
+                  onPressed:(){
+                    testPrint.printNotaSukuCadang(nim,nama,email,jenisKelamin,ttd,pathImage,pathImageTtd);
+                  },
+                  child: Text('Print Cetakan Nota Suku Cadang'),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 50),
+                child:  RaisedButton(
+                  onPressed:(){
+                    testPrint.printTandaTerimaJaminan(nim,nama,email,jenisKelamin,ttd,pathImage,pathImageTtd);
+                  },
+                  child: Text('Print Tanda Terima Jaminan'),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 50),
+                child:  RaisedButton(
+                  onPressed:(){
+                    testPrint.printNotaSukuCadang(nim,nama,email,jenisKelamin,ttd,pathImage,pathImageTtd);
+                  },
+                  child: Text('Print Cetakan Nota & Suku Cadang'),
                 ),
               ),
             ],
