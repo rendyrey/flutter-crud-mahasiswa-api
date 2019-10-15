@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:crud_mahasiswa/ApiService.dart';
-import 'package:crud_mahasiswa/print.dart';
 import 'package:crud_mahasiswa/printer.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
@@ -222,15 +221,4 @@ class _HomeScreenState extends State<HomeScreen>{
       duration:Duration(seconds:4)
     ).show(context);
   }
-
-  Future<void> _printPdf(mahasiswa) async {
-    print('Print ...');
-    await Printing.layoutPdf(
-        onLayout: (PdfPageFormat format) async =>
-            (await generateDocument(format,mahasiswa)).save());
-  }
-
-
-
-
 }

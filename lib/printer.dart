@@ -8,8 +8,11 @@ import 'dart:async';
 import 'package:blue_thermal_printer/blue_thermal_printer.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:pdf/pdf.dart';
+import 'package:printing/printing.dart';
 
 import 'Mahasiswa.dart';
+import 'document.dart';
 
 void main() => runApp(new Printer());
 
@@ -155,7 +158,7 @@ class PrinterState extends State<Printer> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 50),
+                padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 15),
                 child:  RaisedButton(
                   onPressed:(){
                     testPrint.printServiceKittir(nim,nama,email,jenisKelamin,ttd,pathImage,pathImageTtd);
@@ -163,8 +166,15 @@ class PrinterState extends State<Printer> {
                   child: Text('Print Service Ticket & Kittir'),
                 ),
               ),
+                Padding(
+                padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 15),
+                child:  RaisedButton(
+                  onPressed:_printPdfServiceKittir,
+                  child: Text('Export Service Ticket & Kittir to PDF'),
+                ),
+              ),
               Padding(
-                padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 50),
+                padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 15),
                 child:  RaisedButton(
                   onPressed:(){
                     testPrint.printNotaSukuCadang(nim,nama,email,jenisKelamin,ttd,pathImage,pathImageTtd);
@@ -173,7 +183,14 @@ class PrinterState extends State<Printer> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 50),
+                padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 15),
+                child:  RaisedButton(
+                  onPressed:_printPdfNotaSukuCadang,
+                  child: Text('Export Cetakan Nota Suku Cadang to PDF'),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 15),
                 child:  RaisedButton(
                   onPressed:(){
                     testPrint.printTandaTerimaJaminan(nim,nama,email,jenisKelamin,ttd,pathImage,pathImageTtd);
@@ -182,14 +199,29 @@ class PrinterState extends State<Printer> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 50),
+                padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 15),
                 child:  RaisedButton(
-                  onPressed:(){
-                    testPrint.printNotaSukuCadang(nim,nama,email,jenisKelamin,ttd,pathImage,pathImageTtd);
-                  },
-                  child: Text('Print Cetakan Nota & Suku Cadang'),
+                  onPressed:_printPdfTandaTerimaJaminan,
+                  child: Text('Export Tanda Terima Jaminan to PDF'),
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 15),
+                child:  RaisedButton(
+                  onPressed:(){
+                    testPrint.printInvoiceNettingJaminan(nim,nama,email,jenisKelamin,ttd,pathImage,pathImageTtd);
+                  },
+                  child: Text('Print Tanda Terima Jaminan'),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 15),
+                child:  RaisedButton(
+                  onPressed:_printPdfInvoiceNettingJaminan,
+                  child: Text('Export Tanda Terima Jaminan to PDF'),
+                ),
+              ),
+              
             ],
           ),
         ),
@@ -290,5 +322,33 @@ class PrinterState extends State<Printer> {
         duration: duration,
       ),
     );
+  }
+
+  Future<void> _printPdfServiceKittir() async {
+    print('Print ...');
+    await Printing.layoutPdf(
+        onLayout: (PdfPageFormat format) async =>
+            (await generateDocServiceKittir(format)).save());
+  }
+
+  Future<void> _printPdfNotaSukuCadang() async {
+    print('Print ...');
+    await Printing.layoutPdf(
+        onLayout: (PdfPageFormat format) async =>
+            (await generateDocNotaSukuCadang(format)).save());
+  }
+
+  Future<void> _printPdfTandaTerimaJaminan() async {
+    print('Print ...');
+    await Printing.layoutPdf(
+        onLayout: (PdfPageFormat format) async =>
+            (await generateDocTandaTerimaJaminan(format)).save());
+  }
+
+  Future<void> _printPdfInvoiceNettingJaminan() async {
+    print('Print ...');
+    await Printing.layoutPdf(
+        onLayout: (PdfPageFormat format) async =>
+            (await generateDocInvoiceNettingJaminan(format)).save());
   }
 }
