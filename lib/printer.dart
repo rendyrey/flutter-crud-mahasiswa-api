@@ -221,6 +221,15 @@ class PrinterState extends State<Printer> {
                   child: Text('Export Tanda Terima Jaminan to PDF'),
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 15),
+                child:  RaisedButton(
+                  onPressed:(){
+                    testPrint.printContohCetakan(pathImage,pathImageTtd);
+                  },
+                  child: Text('Print contoh cetakan'),
+                ),
+              ),
               
             ],
           ),

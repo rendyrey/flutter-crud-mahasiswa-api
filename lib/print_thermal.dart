@@ -423,6 +423,76 @@ class TestPrint {
     });
   }
 
+  printContohCetakan(String pathImage,String pathImageTtd) async {
+     String printSpace(String string1, String string2){
+      String whitespace = '';
+      int spasi = 63 - (string1.length + string2.length);
+      for(int i=0;i<=spasi;i++){
+        whitespace += ' ';
+      }
+      return whitespace;
+    }
+
+    String _kodeplu = "Kode PLU:";
+    String kodeplu = "3005537";
+
+    String _nonota = "No. Nota:";
+    String nonota = "GT001/27/09/13";
+    String _tanggal = "Tanggal:";
+    String tanggal = "27/09/13";
+    String _pramuniaga = "Pramuniaga:";
+    String pramuniaga = "ADMINISTRATOR";
+  
+
+    String item1 = "W 3430 BLACK DC X1";
+    String kode1 = "S/N: 32L03551";
+    String harga1 = "2.499.000";
+
+    String item2 = "POWER BANK X1";
+    String harga2 = "0";
+    
+    String item3 = "G 3100 PINK X1";
+    String kode3 = "S/N: 32F00936";
+    String harga3 = "549.000";
+
+    String item4 = "C 101 BLACK X1";
+    String kode4 = "S/N 32D11403";
+    String harga4 = "0";
+    
+    String total = "Jumlah Rp. 3.048.000";
+
+    
+    bluetooth.isConnected.then((isConnected){
+      if(isConnected){
+        bluetooth.printImage(pathImage);
+        bluetooth.printNewLine();
+        bluetooth.printCustom("MOBILE PHONE",3,1);
+        bluetooth.printCustom("GIANT POINT SQUARE",3,1);
+        bluetooth.printNewLine();
+        bluetooth.printCustom(_kodeplu+printSpace(_kodeplu,kodeplu)+kodeplu,0,0);
+        bluetooth.printCustom(_nonota+printSpace(_nonota,nonota)+nonota,0,0);
+        bluetooth.printCustom(_tanggal+printSpace(_tanggal,tanggal)+tanggal,0,0);
+        bluetooth.printCustom(_pramuniaga+printSpace(_pramuniaga,pramuniaga)+pramuniaga,0,0);
+        bluetooth.printNewLine();
+        bluetooth.printCustom("PENJUALAN",3,1);
+        bluetooth.printNewLine();
+        bluetooth.printCustom(item1+printSpace(item1,harga1)+harga1,0,0);
+        bluetooth.printCustom(kode1,0,0);
+        bluetooth.printCustom(item2+printSpace(item2,harga2)+harga2,0,0);
+        bluetooth.printCustom(item3+printSpace(item3,harga3)+harga3,0,0);
+        bluetooth.printCustom(kode3,0,0);
+        bluetooth.printCustom(item4+printSpace(item4,harga4)+harga4,0,0);
+        bluetooth.printCustom(kode4,0,0);
+        bluetooth.printCustom(total,0,2);
+        bluetooth.printCustom("Tanda Tangan Pembeli:",0,0);
+        bluetooth.printNewLine();
+        bluetooth.printCustom("(___________________________________________________________)",0,1);
+        bluetooth.printCustom("Perhatian!!!",1,1);
+        bluetooth.printCustom("Barang yang sudah dibeli tidak dapat ditukar atau dikembalikan.",0,1);
+        bluetooth.paperCut();
+      }
+    });
+  }
 
   
 }
