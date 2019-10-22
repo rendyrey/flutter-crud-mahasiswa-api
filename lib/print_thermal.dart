@@ -487,9 +487,12 @@ class TestPrint {
         bluetooth.printCustom(total,0,2);
         bluetooth.printCustom("Tanda Tangan Pembeli:",0,0);
         bluetooth.printImage(pathImageTtd);
-        bluetooth.printCustom("(___________________________________________________________)",0,1);
+        // bluetooth.printCustom("(___________________________________________________________)",0,1);
+        bluetooth.printNewLine();
         bluetooth.printCustom("Perhatian!!!",1,1);
         bluetooth.printCustom("Barang yang sudah dibeli tidak dapat ditukar atau dikembalikan.",0,1);
+        bluetooth.printNewLine();
+        bluetooth.printCustom("--- Lembar 1 untuk Customer ---",0,1);
         bluetooth.paperCut();
       }
     });
