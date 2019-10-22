@@ -464,6 +464,7 @@ class TestPrint {
     
     bluetooth.isConnected.then((isConnected){
       if(isConnected){
+        bluetooth.printCustom("Sep 27, 2013"+printSpace("Sep 27, 2013","7:53 PM")+"7:53 PM",0,0);
         bluetooth.printImage(pathImage);
         bluetooth.printNewLine();
         bluetooth.printCustom("MOBILE PHONE",3,1);
@@ -485,7 +486,7 @@ class TestPrint {
         bluetooth.printCustom(kode4,0,0);
         bluetooth.printCustom(total,0,2);
         bluetooth.printCustom("Tanda Tangan Pembeli:",0,0);
-        bluetooth.printNewLine();
+        bluetooth.printImage(pathImageTtd);
         bluetooth.printCustom("(___________________________________________________________)",0,1);
         bluetooth.printCustom("Perhatian!!!",1,1);
         bluetooth.printCustom("Barang yang sudah dibeli tidak dapat ditukar atau dikembalikan.",0,1);
