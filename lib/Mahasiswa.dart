@@ -47,8 +47,7 @@ class Mahasiswa{
 
 List<Mahasiswa> mahasiswaFromJson(String jsonData){
   final data = json.decode(jsonData);
-  return List<Mahasiswa>.from(data.map((item)=>
-  Mahasiswa.fromJson(item)));
+  return List<Mahasiswa>.from(data.map((item) => Mahasiswa.fromJson(item)));
 }
 
 String mahasiswaToJson(Mahasiswa data){
