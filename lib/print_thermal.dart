@@ -303,7 +303,7 @@ class TestPrint {
         bluetooth.printNewLine();
         bluetooth.printCustom(harga4+printSpace(harga4,total4)+total4,0,0);
         bluetooth.printCustom("TOTAL BIAYA SERVICE"+printSpace("TOTAL BIAYA SERVICE",totalService)+totalService,0,0);
-        bluetooth.printCustom(""+printSpace("","20.000")+"20.000",0,0);
+        bluetooth.printCustom(" "+printSpace(" ","20.000")+"20.000",0,0);
         bluetooth.printCustom("TOTAL BIAYA SERVICE SETELAH DISC"+printSpace("TOTAL BIAYA SERVICE SETELAH DISC","782.500 - 20.000")+"782.500 - 20.000",0,0);
         bluetooth.printCustom("PPN"+printSpace("PPN",ppn)+ppn,0,0);
         bluetooth.printCustom("TOTAL BIAYA SERVICE SETELAH PPN"+printSpace("TOTAL BIAYA SERVICE SETELAH PPN",totalPpn)+totalPpn,0,0);
